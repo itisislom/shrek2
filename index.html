@@ -335,6 +335,7 @@
             flex-direction: column;
             align-items: center;
             width: 100%;
+            padding: 80px 0;
         }
 
         .player-wrapper {
@@ -993,40 +994,54 @@
             }
         }
 
-        /* Исправленный адаптивный контейнер */
-        .video-container-responsive {
-            position: relative;
+        /* Полностью обновленный контейнер для плеера */
+        .movie-player-wrapper {
             width: 100%;
-            /* Принудительно задаем 100% ширины, чтобы избежать схлопывания */
             max-width: 800px;
-            /* Задайте максимальную ширину плеера для ПК (например, 800px или 1000px) */
             margin: 0 auto;
-            /* Центрируем плеер по горизонтали */
-            padding-bottom: 56.25%;
-            /* Пропорции 16:9 */
-            height: 0;
-            overflow: hidden;
+            aspect-ratio: 16 / 9;
             background-color: #000;
             border-radius: 12px;
             border: 2px solid #55cc00;
-            box-shadow: 0 4px 20px rgba(85, 204, 0, 0.15);
+            box-shadow: 0 4px 20px rgba(85, 204, 0, 0.2);
+            overflow: hidden;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Стили для самого iframe остаются прежними */
-        .video-container-responsive iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* Стили для самого фрейма */
+        .movie-player-wrapper iframe {
             width: 100%;
             height: 100%;
-            border: 0;
+            border: none;
+            display: block;
         }
 
-        /* Дополнительное правило для мобильных устройств, чтобы плеер не сжимался слишком сильно */
+        /* Коррекция для планшетов и мобильных экранов */
+        @media (max-width: 768px) {
+            .movie-player-wrapper {
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                margin-right: 0;
+                padding: 0;
+                border-radius: 0;
+                border: 2px solid #55cc00;
+                box-sizing: border-box;
+            }
+        }
+
+        /* Коррекция для маленьких мобильных */
         @media (max-width: 480px) {
-            .video-container-responsive {
-                border-radius: 8px;
-                /* Чуть меньший радиус на мелких экранах */
+            .movie-player-wrapper {
+                width: 100vw;
+                max-width: 100vw;
+                margin-left: calc(-50vw + 50%);
+                margin-right: 0;
+                padding: 0;
+                border-radius: 0;
+                border: 2px solid #55cc00;
+                box-sizing: border-box;
             }
         }
     </style>
@@ -1080,7 +1095,7 @@
         <!-- Player Section -->
         <section class="video-section">
             <h2 class="section-title" id="trans-section_video">Multfilmni Tomosha Qilish</h2>
-            <div class="video-container-responsive">
+            <div class="movie-player-wrapper">
                 <iframe src="https://drive.google.com/file/d/19ZBak2SztX-39Rf4K15WE_dJIv2lTK8h/preview"
                     allow="autoplay; fullscreen" allowfullscreen>
                 </iframe>
