@@ -297,53 +297,6 @@
         section { padding: 80px 0; }
 
         /* =============================================
-           VIDEO PLAYER — ИСПРАВЛЕННЫЙ
-           ============================================= */
-        .video-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 80px 0;
-        }
-
-        /* Внешний контейнер — только ширина и декор */
-        .movie-player-wrapper {
-            width: 100%;
-            max-width: 860px;
-            margin: 0 auto;
-            border-radius: 16px;
-            border: 2px solid #55cc00;
-            box-shadow:
-                0 0 0 1px rgba(85, 204, 0, 0.15),
-                0 8px 40px rgba(0, 0, 0, 0.7),
-                0 0 60px rgba(85, 204, 0, 0.12);
-            overflow: hidden;
-            background: #000;
-            /* НЕТ aspect-ratio здесь! */
-        }
-
-        /* Внутренняя обёртка задаёт пропорцию 16:9 */
-        .movie-player-ratio {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 = 9/16 * 100 */
-            height: 0;
-            overflow: hidden;
-        }
-
-        /* iframe абсолютно позиционирован внутри ratio-обёртки */
-        .movie-player-ratio iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
-
-        /* =============================================
            CHARACTERS
            ============================================= */
         .character-grid {
@@ -530,6 +483,35 @@
         /* CTA */
         .cta-section { padding-bottom: 120px; }
 
+        /* PLAYER */
+        .player-section {
+            padding: 80px 0 60px;
+        }
+
+        .player-container {
+            background: linear-gradient(135deg, rgba(30, 40, 15, 0.5) 0%, rgba(15, 20, 7, 0.7) 100%);
+            border: 2px solid rgba(140, 191, 38, 0.25);
+            border-radius: 20px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3), 0 0 40px rgba(92, 128, 1, 0.1);
+            padding: 16px;
+            transition: var(--transition-smooth);
+        }
+
+        .player-container:hover {
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(92, 128, 1, 0.15);
+            border-color: rgba(140, 191, 38, 0.4);
+        }
+
+        .player-container iframe {
+            display: block;
+            border-radius: 12px;
+            background: var(--dark-swamp);
+            width: 100%;
+            height: 600px;
+        }
+
         .cta-card {
             background: linear-gradient(135deg, rgba(23, 31, 10, 0.8) 0%, rgba(10, 13, 4, 0.95) 100%);
             border: 2px solid var(--swamp-green);
@@ -642,12 +624,6 @@
             .story-card h2, .cta-card h2 { font-size: 1.6rem; }
             .story-card p, .cta-card p { font-size: 1rem; }
             .cta-btn { padding: 15px 30px; font-size: 1rem; width: 100%; justify-content: center; }
-
-            /* Плеер на мобильных — убираем border-radius и box-shadow для edge-to-edge */
-            .movie-player-wrapper {
-                border-radius: 8px;
-                max-width: calc(100% - 32px);
-            }
         }
 
         @media (max-width: 480px) {
@@ -655,18 +631,9 @@
             .top-nav-inner { padding: 0 15px; }
             .brand-logo { font-size: 1.3rem; }
             .container { padding: 0 15px; }
-            .movie-player-wrapper {
-                border-radius: 6px;
-                max-width: calc(100% - 24px);
-            }
         }
 
-        @media (max-width: 360px) {
-            .movie-player-wrapper {
-                border-radius: 4px;
-                max-width: calc(100% - 16px);
-            }
-        }
+
     </style>
 </head>
 
@@ -701,21 +668,19 @@
             </div>
         </header>
 
-        <!-- ============ PLAYER SECTION ============ -->
-        <section class="video-section">
-            <h2 class="section-title" id="trans-section_video">Multfilmni Tomosha Qilish</h2>
-
-            <!-- Внешний контейнер: декор + ограничение ширины -->
-            <div class="movie-player-wrapper">
-                <!-- Внутренняя обёртка: задаёт пропорцию 16:9 через padding-top -->
-                <div class="movie-player-ratio">
-                    <iframe
-                        src="https://drive.google.com/file/d/19ZBak2SztX-39Rf4K15WE_dJIv2lTK8h/preview"
-                        allow="autoplay; fullscreen"
-                        allowfullscreen
-                        loading="lazy">
-                    </iframe>
-                </div>
+        <!-- PLAYER -->
+        <section class="player-section">
+            <h2 class="section-title" id="trans-player_title">Multfilmni Ko'rish</h2>
+            <div class="player-container">
+                <iframe 
+                    src="https://drive.google.com/file/d/19ZBak2SztX-39Rf4K15WE_dJIv2lTK8h/preview" 
+                    width="100%" 
+                    height="600" 
+                    allowfullscreen="true" 
+                    webkitallowfullscreen="true" 
+                    mozallowfullscreen="true"
+                    frameborder="0">
+                </iframe>
             </div>
         </section>
 
@@ -852,7 +817,6 @@
                 badge_voice: "1 Kishi ovoz bergan",
                 badge_days: "3 kunda tayyor bo'lgan",
                 badge_age: "17 yoshda",
-                section_video: "Multfilmni Tomosha Qilish",
                 section_chars: "Afsonaviy Qahramonlar",
                 shrek_desc: "O'zining sokin botqog'ini va sevimli Fionasini himoya qiluvchi mehribon dev.",
                 fiona_desc: "Qirollik malikasi, u o'z sevgisini topdi va shinam botqoq hayotini tanladi.",
@@ -869,6 +833,7 @@
                 stat_duration_desc: "To'liq metrajli multfilm davomiyligi",
                 stat_age_title: "Yosh",
                 stat_age_desc: "Dublyaj yozilgan vaqtdagi muallif yoshi",
+                player_title: "Multfilmni Ko'rish",
                 about_title: "Dublyaj Qanday Yaratildi?",
                 about_text: "Ushbu loyiha 17 yoshli havaskor ijodkor Islom Sadriddinov tomonidan bor-yo'g'i 3 kun ichida to'liq mustaqil ravishda amalga oshirilgan. Har bir qahramonning o'ziga xos xarakteri, his-tuyg'ulari va intonatsiyalari bir inson ovozi orqali mahorat bilan yetkazib berilgan. Bu o'zbek dublyaj olamidagi ajoyib ijodiy tajribalardan biridir.",
                 cta_title: "Ijodkor bilan bog'lanish",
@@ -884,7 +849,6 @@
                 badge_voice: "Озвучено одним человеком",
                 badge_days: "Готово за 3 дня",
                 badge_age: "В возрасте 17 лет",
-                section_video: "Смотреть Мультфильм",
                 section_chars: "Легендарные Персонажи",
                 shrek_desc: "Добродушный великан, защищающий своё уютное болото и любимую Фиону.",
                 fiona_desc: "Королевская принцесса, выбравшая любовь и искреннюю жизнь на болоте.",
@@ -901,6 +865,7 @@
                 stat_duration_desc: "Продолжительность полного метра фильма",
                 stat_age_title: "Лет",
                 stat_age_desc: "Было автору на момент создания озвучки",
+                player_title: "Смотреть фильм",
                 about_title: "Как создавался дубляж?",
                 about_text: "Этот проект был полностью реализован 17-летним энтузиастом Исломом Садриддиновым всего за 3 дня. Характер, эмоции и интонации каждого персонажа были выразительно переданы голосом одного человека. Это уникальный творческий эксперимент в сфере узбекского дубляжа.",
                 cta_title: "Связаться с автором",
@@ -916,7 +881,6 @@
                 badge_voice: "Voiced by 1 person",
                 badge_days: "Completed in 3 days",
                 badge_age: "At age 17",
-                section_video: "Watch Movie",
                 section_chars: "Legendary Characters",
                 shrek_desc: "A good-natured ogre protecting his quiet swamp and beloved Fiona.",
                 fiona_desc: "A royal princess who found her true love and embraced the cozy swamp life.",
@@ -933,6 +897,7 @@
                 stat_duration_desc: "Full duration of the animated feature",
                 stat_age_title: "Years Old",
                 stat_age_desc: "Creator's age at the time of dubbing",
+                player_title: "Watch the Movie",
                 about_title: "How Was It Made?",
                 about_text: "This project was completely realized by 17-year-old creator Islom Sadriddinov in just 3 days. The unique personality, emotions, and intonation of each character were expressively delivered by a single voice. It is a remarkable creative experiment in Uzbek dubbing.",
                 cta_title: "Contact the Creator",
